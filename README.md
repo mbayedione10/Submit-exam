@@ -1,6 +1,7 @@
 # Submit-exam
 
 Permit students to upload there exam file directly when they're done
+The file saved in database_exam/exam
 ***
  <img src="database_exam/exam/imcsite.png" align="center"
      alt="Size Limit logo by Anton Lovchikov">  
@@ -11,7 +12,7 @@ Permit students to upload there exam file directly when they're done
 * [Clone Project](#2-Clone-repositorie)
 * [Install required python packages](#3-Install-Packages)
 * [Database migrations](#4-Apply-database-migrations)
-* [Test local](#5-Run-the-app)
+* [Test local](#5-Run-the-app
 * [Troubleshooting](#6-Troubleshooting)
 
 
