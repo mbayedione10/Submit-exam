@@ -12,7 +12,7 @@ The file saved in database_exam/exam
 * [Clone Project](#2-Clone-repositorie)
 * [Install required python packages](#3-Install-Packages)
 * [Database migrations](#4-Apply-database-migrations)
-* [Test local](#5-Run-the-app
+* [Test local](#5-Run-the-app0)
 * [Troubleshooting](#6-Troubleshooting)
 
 
