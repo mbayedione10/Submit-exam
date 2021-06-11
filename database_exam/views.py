@@ -10,7 +10,7 @@ from .models import *
 class Index(View):
     def get(self, request, *args, **kwargs):
         form = ExamForm()
-        fileexam = Exam_txt.objects.filter(exam_file__contains='tp2')
+        fileexam = Exam_txt.objects.filter(exam_file__contains='examen')
         context = {
             'form': form,
             'file': fileexam
