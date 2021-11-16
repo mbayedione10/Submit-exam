@@ -1,0 +1,181 @@
+mysql> use boutique
+Database changed
+mysql> show database
+    -> show database;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database
+show database' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema | 
+| boutique           | 
+| cours              | 
+| mysql              | 
+| test               | 
++--------------------+
+5 rows in set (0.14 sec)
+
+mysql> create table client(
+    -> contact int not NULL,
+    -> Nom varchar(50)not Null,
+    -> prenom varchar(100)not Null,
+    -> adresse varchar(100),
+    -> primary key(contact)
+    -> );
+ERROR 1050 (42S01): Table 'client' already exists
+mysql> describe client;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| contact | int(11)      | NO   | PRI | NULL    |       | 
+| nom     | varchar(50)  | NO   |     | NULL    |       | 
+| prenom  | varchar(100) | NO   |     | NULL    |       | 
+| adress  | varchar(100) | YES  |     | NULL    |       | 
++---------+--------------+------+-----+---------+-------+
+4 rows in set (0.20 sec)
+
+mysql> describe produit;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| idproduit   | int(11)      | NO   | PRI | NULL    | auto_increment | 
+| nomproduit  | varchar(50)  | YES  |     | NULL    |                | 
+| prixproduit | int(11)      | NO   |     | NULL    |                | 
+| fabriquant  | varchar(100) | YES  |     | NULL    |                | 
++-------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.07 sec)
+
+mysql> describe commande;
++---------------+---------+------+-----+---------+----------------+
+| Field         | Type    | Null | Key | Default | Extra          |
++---------------+---------+------+-----+---------+----------------+
+| idcommande    | int(11) | NO   | PRI | NULL    | auto_increment | 
+| date_commande | date    | NO   |     | NULL    |                | 
+| idproduit     | int(11) | YES  | MUL | NULL    |                | 
+| contact       | int(11) | YES  | MUL | NULL    |                | 
++---------------+---------+------+-----+---------+----------------+
+4 rows in set (0.02 sec)
+
+mysql> #inserer des donn‚es dans commande
+mysql> insert into date commande(07/05/2021,9,775643212);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'commande(07/05/2021,9,775643212)' at line 1
+mysql> insert into commande(07/05/2021,9,775643212);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '07/05/2021,9,775643212)' at line 1
+mysql> insert into commande values (07/05/2021,9,775643212);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into commande values ('07/05/2021',9,775643212);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into commande ,date commande,idproduit,contact,values ('07/05/2021',9,775643212);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'date commande,idproduit,contact,values ('07/05/2021',9,775643212)' at line 1
+mysql> insert into commande (date_commande,idproduit,contact) values ('2021-05-07',9,775643212);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`boutique`.`commande`, CONSTRAINT `commande_ibfk_1` FOREIGN KEY (`idproduit`) REFERENCES `produit` (`idproduit`))
+mysql> select * from produit
+    -> ;
+Empty set (0.06 sec)
+
+mysql> select * from clients
+    -> ;
+ERROR 1146 (42S02): Table 'boutique.clients' doesn't exist
+mysql> select * from client;
++-----------+----------+-------------+--------+
+| contact   | nom      | prenom      | adress |
++-----------+----------+-------------+--------+
+| 708964532 | Dieng    | Fama        | saly   | 
+| 763452678 | Goudiaby | pierre      | somone | 
+| 768882345 | Niane    | Fary        | somone | 
+| 769843212 | Manga    | Ibrahima    | saly   | 
+| 771234567 | seck     | Ramatoulaye | Somone | 
+| 772347643 | tall     | abdoulaye   | Mbour  | 
+| 775643212 | Ndiaye   | Bassirou    | SALY   | 
++-----------+----------+-------------+--------+
+7 rows in set (0.00 sec)
+
+mysql> select * from produit;
+Empty set (0.00 sec)
+
+mysql> select * from produits;
+ERROR 1146 (42S02): Table 'boutique.produits' doesn't exist
+mysql> select * from produit;
+Empty set (0.00 sec)
+
+mysql> desc produit;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| idproduit   | int(11)      | NO   | PRI | NULL    | auto_increment | 
+| nomproduit  | varchar(50)  | YES  |     | NULL    |                | 
+| prixproduit | int(11)      | NO   |     | NULL    |                | 
+| fabriquant  | varchar(100) | YES  |     | NULL    |                | 
++-------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from produit;
+Empty set (0.00 sec)
+
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema | 
+| boutique           | 
+| cours              | 
+| mysql              | 
+| test               | 
++--------------------+
+5 rows in set (0.05 sec)
+
+mysql> insert into commande (date_commande,idproduit,contact) values ('2021-05-07',9,775643212);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`boutique`.`commande`, CONSTRAINT `commande_ibfk_1` FOREIGN KEY (`idproduit`) REFERENCES `produit` (`idproduit`))
+mysql> #afficher toutes les donn‚es de la table client
+mysql> select *from client;
++-----------+----------+-------------+--------+
+| contact   | nom      | prenom      | adress |
++-----------+----------+-------------+--------+
+| 708964532 | Dieng    | Fama        | saly   | 
+| 763452678 | Goudiaby | pierre      | somone | 
+| 768882345 | Niane    | Fary        | somone | 
+| 769843212 | Manga    | Ibrahima    | saly   | 
+| 771234567 | seck     | Ramatoulaye | Somone | 
+| 772347643 | tall     | abdoulaye   | Mbour  | 
+| 775643212 | Ndiaye   | Bassirou    | SALY   | 
++-----------+----------+-------------+--------+
+7 rows in set (0.00 sec)
+
+mysql> #afficher le nombre de commande a la date du 07/Mai/2021
+mysql> select *from commande;
+Empty set (0.00 sec)
+
+mysql> #afficher tous les produits frabriqu‚s par Apple
+mysql> select *from produit;
+Empty set (0.00 sec)
+
+mysql> #afficher tous les clients dans l'ordre alphab‚tique
+mysql> select *from client;
++-----------+----------+-------------+--------+
+| contact   | nom      | prenom      | adress |
++-----------+----------+-------------+--------+
+| 708964532 | Dieng    | Fama        | saly   | 
+| 763452678 | Goudiaby | pierre      | somone | 
+| 768882345 | Niane    | Fary        | somone | 
+| 769843212 | Manga    | Ibrahima    | saly   | 
+| 771234567 | seck     | Ramatoulaye | Somone | 
+| 772347643 | tall     | abdoulaye   | Mbour  | 
+| 775643212 | Ndiaye   | Bassirou    | SALY   | 
++-----------+----------+-------------+--------+
+7 rows in set (0.00 sec)
+
+mysql> #pour chaque produit,afficher le nom et son frabriquant
+mysql> select *from produit;
+Empty set (0.00 sec)
+
+mysql> #afficher les produits par ordre d‚croissant de prix
+mysql> select *produit;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'produit' at line 1
+mysql> select *from client where nom like N;
+ERROR 1054 (42S22): Unknown column 'N' in 'where clause'
+mysql> select *from client where nom like 'N';
+Empty set (0.05 sec)
+
+mysql> notee

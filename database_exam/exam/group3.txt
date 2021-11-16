@@ -1,0 +1,849 @@
+mysql> show database;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema | 
+| mysql              | 
+| test               | 
++--------------------+
+3 rows in set (0.28 sec)
+
+mysql> create database boutique;
+Query OK, 1 row affected (2.93 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema | 
+| boutique           | 
+| mysql              | 
+| test               | 
++--------------------+
+4 rows in set (0.00 sec)
+
+mysql> drop database boutique;
+Query OK, 0 rows affected (2.82 sec)
+mysql> #enregistrer les bases de données
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema | 
+| mysql              | 
+| test               | 
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql> #création de la base de donn‚es
+mysql> create database boutique;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> #utilisation base de donnees boutique
+mysql> use boutique;
+Database changed
+mysql> create table CLIENT(
+    -> CONTACTS int NOT NULL,
+    -> nom varchar(50) NOT NULL,
+    -> prenom varchar(100) NOT NULL,
+    -> adresse varchar(100) NOT NULL,
+    -> PRIMARY KEY(contacts)
+    -> );
+Query OK, 0 rows affected (1.37 sec)
+
+mysql> describe client
+    -> ;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| CONTACTS | int(11)      | NO   | PRI | NULL    |       | 
+| nom      | varchar(50)  | NO   |     | NULL    |       | 
+| prenom   | varchar(100) | NO   |     | NULL    |       | 
+| adresse  | varchar(100) | NO   |     | NULL    |       | 
++----------+--------------+------+-----+---------+-------+
+4 rows in set (0.05 sec)
+
+
+mysql> create table PRODUITS(
+    -> idProduit int not null AUTO_INCREMENT,
+    -> nomProduit varchar(50) not null,
+    -> prixProduit int not null,
+    -> fabriquant varchar(100),
+    -> PRIMARY KEY(idProduit)
+    -> );
+Query OK, 0 rows affected (2.89 sec)
+mysql> tee TP1.txt
+mysql> show tables;
++--------------------+
+| Tables_in_boutique |
++--------------------+
+| client             | 
+| commande           | 
+| produits           | 
++--------------------+
+3 rows in set (0.02 sec)
+
+mysql> desc client
+    -> ;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| CONTACTS | int(11)      | NO   | PRI | NULL    |       | 
+| nom      | varchar(50)  | NO   |     | NULL    |       | 
+| prenom   | varchar(100) | NO   |     | NULL    |       | 
+| adresse  | varchar(100) | NO   |     | NULL    |       | 
++----------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select*from client;
++-----------+--------+-------------+---------+
+| CONTACTS  | nom    | prenom      | adresse |
++-----------+--------+-------------+---------+
+| 771234567 | seck   | Ramatoulaye | Somone  | 
+| 772347643 | tall   | abdoulaye   | Mbour   | 
+| 775643212 | Ndiaye | BASSIROU    | SALY    | 
++-----------+--------+-------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> #description des diff‚rentes tables de la base de donn‚e boutique;
+mysql> show tables;
++--------------------+
+| Tables_in_boutique |
++--------------------+
+| client             | 
+| commande           | 
+| produits           | 
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql> desc client;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| CONTACTS | int(11)      | NO   | PRI | NULL    |       | 
+| nom      | varchar(50)  | NO   |     | NULL    |       | 
+| prenom   | varchar(100) | NO   |     | NULL    |       | 
+| adresse  | varchar(100) | NO   |     | NULL    |       | 
++----------+--------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> desc commande
+    -> ;
++---------------+---------+------+-----+---------+----------------+
+| Field         | Type    | Null | Key | Default | Extra          |
++---------------+---------+------+-----+---------+----------------+
+| idcommande    | int(11) | NO   | PRI | NULL    | auto_increment | 
+| date_commande | date    | NO   |     | NULL    |                | 
+| idProduit     | int(11) | YES  | MUL | NULL    |                | 
+| contacts      | int(11) | YES  | MUL | NULL    |                | 
++---------------+---------+------+-----+---------+----------------+
+4 rows in set (0.02 sec)
+
+mysql> desc produits;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| idProduit   | int(11)      | NO   | PRI | NULL    | auto_increment | 
+| nomProduit  | varchar(50)  | NO   |     | NULL    |                | 
+| prixProduit | int(11)      | NO   |     | NULL    |                | 
+| fabriquant  | varchar(100) | YES  |     | NULL    |                | 
++-------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.02 sec)
+
+mysql> #Insertion de nouveaux donn‚es dans la base de donn‚e;
+ 
+mysql> insert into client values(763452678,'Goudiaby','Pierre','Somone');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into client values(708964532,'Dieng','Fama','Saly');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into client values(769843212,'Manga','Ibrahima','Saly');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into client values(768882345,'Niane','Fary','Somone');
+Query OK, 1 row affected (0.06 sec)
+
+mysql>  insert into client values(709812308,'Ndiaye','Marie','Mbour');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select*from client;
++-----------+----------+-------------+---------+
+| CONTACTS  | nom      | prenom      | adresse |
++-----------+----------+-------------+---------+
+| 708964532 | Dieng    | Fama        | Saly    | 
+| 709812308 | Ndiaye   | Marie       | Mbour   | 
+| 763452678 | Goudiaby | Pierre      | Somone  | 
+| 768882345 | Niane    | Fary        | Somone  | 
+| 769843212 | Manga    | Ibrahima    | Saly    | 
+| 771234567 | seck     | Ramatoulaye | Somone  | 
+| 772347643 | tall     | abdoulaye   | Mbour   | 
+| 775643212 | Ndiaye   | BASSIROU    | SALY    | 
++-----------+----------+-------------+---------+
+8 rows in set (0.00 sec)
+mysql> desc produits;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| idProduit   | int(11)      | NO   | PRI | NULL    | auto_increment | 
+| nomProduit  | varchar(50)  | NO   |     | NULL    |                | 
+| prixProduit | int(11)      | NO   |     | NULL    |                | 
+| fabriquant  | varchar(100) | YES  |     | NULL    |                | 
++-------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.02 sec)
+
+mysql> insert into produits(nomProduit,prixProduit,fabriquant) values ('macbook air',500000,'apple');
+Query OK, 1 row affected (1.39 sec)
+
+mysql> insert into produits(nomProduit,prixProduit,fabriquant) values ('iphone 12',450000,'apple');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into produits(nomProduit,prixProduit,fabriquant) values ('TV 55 pouces',910000,'LG');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into produits(nomproduit,prixProduit,fabriquant) values ('Camon 15',48900,'Tecno');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into produits(nomproduit,prixproduit) values ('Ring light',20000);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into produits(nomproduit,prixproduit,fabriquant) values ('chargeur macbook',15000,'apple');
+Query OK, 1 row affected (0.31 sec)
+
+mysql> insert into produits(nomproduit,prixproduit,fabriquant) values ('probook i5',200000,'HP');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into produits(nomproduit,prixproduit,fabriquant) values ('iphone XR',255000,'apple');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into produits(nomproduit,prixproduit,fabriquant) values ('Notebook 255 G7',200000,'HP');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into produits(nomproduit,prixproduit,fabriquant) values ('spark 4',60000,'Tecno');
+Query OK, 1 row affected (0.08 sec)
+mysql> select*from produits;
++-----------+------------------+-------------+------------+
+| idProduit | nomProduit       | prixProduit | fabriquant |
++-----------+------------------+-------------+------------+
+|         1 | macbook air      |      500000 | apple      | 
+|         2 | macbook air      |      500000 | apple      | 
+|         3 | iphone 12        |      450000 | apple      | 
+|         4 | TV 55 pouces     |      910000 | LG         | 
+|         5 | Camon 15         |       48900 | Tecno      | 
+|         6 | Ring light       |       20000 | NULL       | 
+|         7 | chargeur macbook |       15000 | apple      | 
+|         8 | probook i5       |      200000 | HP         | 
+|         9 | iphone XR        |      255000 | apple      | 
+|        10 | Notebook 255 G7  |      200000 | HP         | 
+|        11 | spark 4          |       60000 | Tecno      | 
++-----------+------------------+-------------+------------+
+11 rows in set (0.00 sec)
+
+mysql> desc commande;
++---------------+---------+------+-----+---------+----------------+
+| Field         | Type    | Null | Key | Default | Extra          |
++---------------+---------+------+-----+---------+----------------+
+| idcommande    | int(11) | NO   | PRI | NULL    | auto_increment | 
+| date_commande | date    | NO   |     | NULL    |                | 
+| idProduit     | int(11) | YES  | MUL | NULL    |                | 
+| contacts      | int(11) | YES  | MUL | NULL    |                | 
++---------------+---------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into commande(date_commande,idproduit,contacts) values(20/04/2021,1,771234567);
+Query OK, 1 row affected (1.33 sec)
+
+mysql> insert into commande(date_commande,idproduit,contacts) values(05/05/2021,4,708964532);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into commande(date_commande,idproduit,contacts) values(07/05/2021,9,768882345);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into commande(date_commande,idproduit,contacts) values(20/04/2021,6,768882345);
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into commande(date_commande,idproduit,contacts) values(05/05/2021,10,772347643);
+Query OK, 1 row affected (2.90 sec)
+
+mysql> insert into commande(date_commande,idproduit,contacts) values(07/05/2021,5,763452678);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into commande(date_commande,idproduit,contacts) values(07/05/2021,4,772347643);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into commande(date_commande,idproduit,contacts) values(08/05/2021,2,709812308);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into commande(date_commande,idproduit,contacts) values(10/05/2021,9,709812308);
+Query OK, 1 row affected (0.06 sec)
+
+mysql>  update commande set date_commande='2021-04-20' where idcommande=1;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  update commande set date_commande='2021-05-05' where idcommande=2;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update commande set date_commande='2021-05-07' where idcommande=2;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update commande set date_commande='2021-05-07' where idcommande=3;
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update commande set date_commande='2021-04-20' where idcommande=4;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  update commande set date_commande='2021-05-05' where idcommande=5;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update commande set date_commande='2021-05-07' where idcommande=6;
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update commande set date_commande='2021-05-07' where idcommande=7;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update commande set date_commande='2021-05-08' where idcommande=8;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update commande set date_commande='2021-05-10' where idcommande=9;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> #(question 1):description des differentes tables de la bbd;
+mysql> show tables;
++--------------------+
+| Tables_in_boutique |
++--------------------+
+| client             | 
+| commande           | 
+| produits           | 
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql> desc client;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| CONTACTS | int(11)      | NO   | PRI | NULL    |       | 
+| nom      | varchar(50)  | NO   |     | NULL    |       | 
+| prenom   | varchar(100) | NO   |     | NULL    |       | 
+| adresse  | varchar(100) | NO   |     | NULL    |       | 
++----------+--------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> select*from client;
++-----------+----------+-------------+---------+
+| CONTACTS  | nom      | prenom      | adresse |
++-----------+----------+-------------+---------+
+| 708964532 | Dieng    | Fama        | Saly    | 
+| 709812308 | Ndiaye   | Marie       | Mbour   | 
+| 763452678 | Goudiaby | Pierre      | Somone  | 
+| 768882345 | Niane    | Fary        | Somone  | 
+| 769843212 | Manga    | Ibrahima    | Saly    | 
+| 771234567 | seck     | Ramatoulaye | Somone  | 
+| 772347643 | tall     | abdoulaye   | Mbour   | 
+| 775643212 | Ndiaye   | BASSIROU    | SALY    | 
++-----------+----------+-------------+---------+
+8 rows in set (0.00 sec)
+
+mysql> select*from commande;
++------------+---------------+-----------+-----------+
+| idcommande | date_commande | idProduit | contacts  |
++------------+---------------+-----------+-----------+
+|          1 | 2021-04-20    |         1 | 771234567 | 
+|          2 | 2021-05-07    |         4 | 708964532 | 
+|          3 | 2021-05-07    |         9 | 768882345 | 
+|          4 | 2021-04-20    |         6 | 768882345 | 
+|          5 | 2021-05-05    |        10 | 772347643 | 
+|          6 | 2021-05-07    |         5 | 763452678 | 
+|          7 | 2021-05-07    |         4 | 772347643 | 
+|          8 | 2021-05-08    |         2 | 709812308 | 
+|          9 | 2021-05-10    |         9 | 709812308 | 
++------------+---------------+-----------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> select*from produits;
++-----------+------------------+-------------+------------+
+| idProduit | nomProduit       | prixProduit | fabriquant |
++-----------+------------------+-------------+------------+
+|         1 | macbook air      |      500000 | apple      | 
+|         2 | macbook air      |      500000 | apple      | 
+|         3 | iphone 12        |      450000 | apple      | 
+|         4 | TV 55 pouces     |      910000 | LG         | 
+|         5 | Camon 15         |       48900 | Tecno      | 
+|         6 | Ring light       |       20000 | NULL       | 
+|         7 | chargeur macbook |       15000 | apple      | 
+|         8 | probook i5       |      200000 | HP         | 
+|         9 | iphone XR        |      255000 | apple      | 
+|        10 | Notebook 255 G7  |      200000 | HP         | 
+|        11 | spark 4          |       60000 | Tecno      | 
++-----------+------------------+-------------+------------+
+11 rows in set (0.00 sec)
+
+mysql> #(question 2) insertion de nouveaux donn‚es dans la bdd;
+mysql> insert into client values(776646892,'Seck','Ramatoulaye','Dakar');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into client values(702184785,'Niane','Fary','Dakar');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into client values(761320983,'Ndiaye','Ibrahima','Mbour');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into commande(date_commande,idproduit,contacts) values(07/05/2021,9,775643212);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into commande(date_commande,idproduit,contacts) values(05/05/2021,10,708964532);
+Query OK, 1 row affected (0.91 sec)
+
+mysql> #(question 7): tous les clients par ordre alphab‚tique;
+
+mysql> select*from client order by nom;
++-----------+----------+-------------+---------+
+| CONTACTS  | nom      | prenom      | adresse |
++-----------+----------+-------------+---------+
+| 708964532 | Dieng    | Fama        | Saly    | 
+| 763452678 | Goudiaby | Pierre      | Somone  | 
+| 769843212 | Manga    | Ibrahima    | Saly    | 
+| 709812308 | Ndiaye   | Marie       | Mbour   | 
+| 761320983 | Ndiaye   | Ibrahima    | Mbour   | 
+| 775643212 | Ndiaye   | BASSIROU    | SALY    | 
+| 702184785 | Niane    | Fary        | Dakar   | 
+| 768882345 | Niane    | Fary        | Somone  | 
+| 771234567 | seck     | Ramatoulaye | Somone  | 
+| 776646892 | Seck     | Ramatoulaye | Dakar   | 
+| 772347643 | tall     | abdoulaye   | Mbour   | 
++-----------+----------+-------------+---------+
+11 rows in set (0.03 sec)
+
+mysql> #(question9);Afficher les produits par ordre décroissant de prix
+mysql> select*from produits order by prixProduit desc;
++-----------+------------------+-------------+------------+
+| idProduit | nomProduit       | prixProduit | fabriquant |
++-----------+------------------+-------------+------------+
+|         4 | TV 55 pouces     |      910000 | LG         | 
+|         1 | macbook air      |      500000 | apple      | 
+|         2 | macbook air      |      500000 | apple      | 
+|         3 | iphone 12        |      450000 | apple      | 
+|         9 | iphone XR        |      255000 | apple      | 
+|        10 | Notebook 255 G7  |      200000 | HP         | 
+|         8 | probook i5       |      200000 | HP         | 
+|        11 | spark 4          |       60000 | Tecno      | 
+|         5 | Camon 15         |       48900 | Tecno      | 
+|         6 | Ring light       |       20000 | NULL       | 
+|         7 | chargeur macbook |       15000 | apple      | 
++-----------+------------------+-------------+------------+
+11 rows in set (0.00 sec)
+
+mysql> #question11(liste des clients dont les noms commencent par N);
+
+mysql> select*from client where nom like'%N%';
++-----------+--------+----------+---------+
+| CONTACTS  | nom    | prenom   | adresse |
++-----------+--------+----------+---------+
+| 702184785 | Niane  | Fary     | Dakar   | 
+| 708964532 | Dieng  | Fama     | Saly    | 
+| 709812308 | Ndiaye | Marie    | Mbour   | 
+| 761320983 | Ndiaye | Ibrahima | Mbour   | 
+| 768882345 | Niane  | Fary     | Somone  | 
+| 769843212 | Manga  | Ibrahima | Saly    | 
+| 775643212 | Ndiaye | BASSIROU | SALY    | 
++-----------+--------+----------+---------+
+7 rows in set (0.00 sec)
+
+mysql> notee;
+mysql> use boutique
+Database changed
+mysql> update client set adresse="Saly" where contacts=768882345;
+Query OK, 0 rows affected (0.08 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> desc client;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| CONTACTS | int(11)      | NO   | PRI | NULL    |       | 
+| nom      | varchar(50)  | NO   |     | NULL    |       | 
+| prenom   | varchar(100) | NO   |     | NULL    |       | 
+| adresse  | varchar(100) | NO   |     | NULL    |       | 
++----------+--------------+------+-----+---------+-------+
+4 rows in set (0.09 sec)
+
+#question 3) modification de l'adresse de Fary Niane;
+update set adresse=Saly where contacts='768882345'
+mysql> select*from client;
++-----------+----------+-------------+---------+
+| CONTACTS  | nom      | prenom      | adresse |
++-----------+----------+-------------+---------+
+| 702184785 | Niane    | Fary        | Dakar   | 
+| 708964532 | Dieng    | Fama        | Saly    | 
+| 709812308 | Ndiaye   | Marie       | Mbour   | 
+| 761320983 | Ndiaye   | Ibrahima    | Mbour   | 
+| 763452678 | Goudiaby | Pierre      | Somone  | 
+| 768882345 | Niane    | Fary        | Saly    | 
+| 769843212 | Manga    | Ibrahima    | Saly    | 
+| 771234567 | seck     | Ramatoulaye | Somone  | 
+| 772347643 | tall     | abdoulaye   | Mbour   | 
+| 775643212 | Ndiaye   | BASSIROU    | SALY    | 
+| 776646892 | Seck     | Ramatoulaye | Dakar   | 
++-----------+----------+-------------+---------+
+11 rows in set (0.00 sec)
+
+mysql> #(question 4): Afficher le nombre total de clients;
+mysql> select count(*) from client;
++----------+
+| count(*) |
++----------+
+|       11 | 
++----------+
+1 row in set (2.76 sec)
+
+
+mysql> desc client' at line 1
+mysql> +----------+--------------+------+-----+---------+-------+
+    -> | Field    | Type         | Null | Key | Default | Extra |
+    -> +----------+--------------+------+-----+---------+-------+
+    -> | CONTACTS | int(11)      | NO   | PRI | NULL    |       |
+    -> | nom      | varchar(50)  | NO   |     | NULL    |       |
+    -> | prenom   | varchar(100) | NO   |     | NULL    |       |
+    -> | adresse  | varchar(100) | NO   |     | NULL    |       |
+    -> +----------+--------------+------+-----+---------+-------+
+    -> 4 rows in set (0.09 sec)
+   
+mysql> select*from c' at line 1
+mysql> +-----------+----------+-------------+---------+
+    -> | CONTACTS  | nom      | prenom      | adresse |
+    -> +-----------+----------+-------------+---------+
+    -> | 702184785 | Niane    | Fary        | Dakar   |
+    -> | 708964532 | Dieng    | Fama        | Saly    |
+    -> | 709812308 | Ndiaye   | Marie       | Mbour   |
+    -> | 761320983 | Ndiaye   | Ibrahima    | Mbour   |
+    -> | 763452678 | Goudiaby | Pierre      | Somone  |
+    -> | 768882345 | Niane    | Fary        | Saly    |
+    -> | 769843212 | Manga    | Ibrahima    | Saly    |
+    -> | 771234567 | seck     | Ramatoulaye | Somone  |
+    -> | 772347643 | tall     | abdoulaye   | Mbour   |
+    -> | 775643212 | Ndiaye   | BASSIROU    | SALY    |
+    -> | 776646892 | Seck     | Ramatoulaye | Dakar   |
+    -> +-----------+----------+-------------+---------+
+    -> 11 rows in set (0.00 sec)
+    -> 
+    ->
+mysql> select*from c' at line 1
+mysql> +-----------+----------+-------------+---------+
+    -> | CONTACTS  | nom      | prenom      | adresse |
+    -> +-----------+----------+-------------+---------+
+    -> | 702184785 | Niane    | Fary        | Dakar   |
+    -> | 708964532 | Dieng    | Fama        | Saly    |
+    -> | 709812308 | Ndiaye   | Marie       | Mbour   |
+    -> | 761320983 | Ndiaye   | Ibrahima    | Mbour   |
+    -> | 763452678 | Goudiaby | Pierre      | Somone  |
+    -> | 768882345 | Niane    | Fary        | Saly    |
+    -> | 769843212 | Manga    | Ibrahima    | Saly    |
+    -> | 771234567 | seck     | Ramatoulaye | Somone  |
+    -> | 772347643 | tall     | abdoulaye   | Mbour   |
+    -> | 775643212 | Ndiaye   | BASSIROU    | SALY    |
+    -> | 776646892 | Seck     | Ramatoulaye | Dakar   |
+    -> +-----------+----------+-------------+---------+
+    -> 11 rows in set (0.00 sec)
+
+
+mysql> #(question 10): Afficher les produits dont le prix est compris entre 50000 et 250000;
+
+mysql> select*from produits where prixProduit between 50000 and 250000;
++-----------+-----------------+-------------+------------+
+| idProduit | nomProduit      | prixProduit | fabriquant |
++-----------+-----------------+-------------+------------+
+|         8 | probook i5      |      200000 | HP         | 
+|        10 | Notebook 255 G7 |      200000 | HP         | 
+|        11 | spark 4         |       60000 | Tecno      | 
++-----------+-----------------+-------------+------------+
+3 rows in set (0.05 sec)
+
+mysql> #(question 12): Pour chaque commande, afficher les informations du client et du produit correspondant;
+mysql> select*from client cross join commande;
++-----------+----------+-------------+---------+------------+---------------+-----------+-----------+
+| CONTACTS  | nom      | prenom      | adresse | idcommande | date_commande | idProduit | contacts  |
++-----------+----------+-------------+---------+------------+---------------+-----------+-----------+
+| 702184785 | Niane    | Fary        | Dakar   |          1 | 2021-04-20    |         1 | 771234567 | 
+| 708964532 | Dieng    | Fama        | Saly    |          1 | 2021-04-20    |         1 | 771234567 | 
+| 709812308 | Ndiaye   | Marie       | Mbour   |          1 | 2021-04-20    |         1 | 771234567 | 
+| 761320983 | Ndiaye   | Ibrahima    | Mbour   |          1 | 2021-04-20    |         1 | 771234567 | 
+| 763452678 | Goudiaby | Pierre      | Somone  |          1 | 2021-04-20    |         1 | 771234567 | 
+| 768882345 | Niane    | Fary        | Saly    |          1 | 2021-04-20    |         1 | 771234567 | 
+| 769843212 | Manga    | Ibrahima    | Saly    |          1 | 2021-04-20    |         1 | 771234567 | 
+| 771234567 | seck     | Ramatoulaye | Somone  |          1 | 2021-04-20    |         1 | 771234567 | 
+| 772347643 | tall     | abdoulaye   | Mbour   |          1 | 2021-04-20    |         1 | 771234567 | 
+| 775643212 | Ndiaye   | BASSIROU    | SALY    |          1 | 2021-04-20    |         1 | 771234567 | 
+| 776646892 | Seck     | Ramatoulaye | Dakar   |          1 | 2021-04-20    |         1 | 771234567 | 
+| 702184785 | Niane    | Fary        | Dakar   |          2 | 2021-05-07    |         4 | 708964532 | 
+| 708964532 | Dieng    | Fama        | Saly    |          2 | 2021-05-07    |         4 | 708964532 | 
+| 709812308 | Ndiaye   | Marie       | Mbour   |          2 | 2021-05-07    |         4 | 708964532 | 
+| 761320983 | Ndiaye   | Ibrahima    | Mbour   |          2 | 2021-05-07    |         4 | 708964532 | 
+| 763452678 | Goudiaby | Pierre      | Somone  |          2 | 2021-05-07    |         4 | 708964532 | 
+| 768882345 | Niane    | Fary        | Saly    |          2 | 2021-05-07    |         4 | 708964532 | 
+| 769843212 | Manga    | Ibrahima    | Saly    |          2 | 2021-05-07    |         4 | 708964532 | 
+| 771234567 | seck     | Ramatoulaye | Somone  |          2 | 2021-05-07    |         4 | 708964532 | 
+| 772347643 | tall     | abdoulaye   | Mbour   |          2 | 2021-05-07    |         4 | 708964532 | 
+| 775643212 | Ndiaye   | BASSIROU    | SALY    |          2 | 2021-05-07    |         4 | 708964532 | 
+| 776646892 | Seck     | Ramatoulaye | Dakar   |          2 | 2021-05-07    |         4 | 708964532 | 
+| 702184785 | Niane    | Fary        | Dakar   |          3 | 2021-05-07    |         9 | 768882345 | 
+| 708964532 | Dieng    | Fama        | Saly    |          3 | 2021-05-07    |         9 | 768882345 | 
+| 709812308 | Ndiaye   | Marie       | Mbour   |          3 | 2021-05-07    |         9 | 768882345 | 
+| 761320983 | Ndiaye   | Ibrahima    | Mbour   |          3 | 2021-05-07    |         9 | 768882345 | 
+| 763452678 | Goudiaby | Pierre      | Somone  |          3 | 2021-05-07    |         9 | 768882345 | 
+| 768882345 | Niane    | Fary        | Saly    |          3 | 2021-05-07    |         9 | 768882345 | 
+| 769843212 | Manga    | Ibrahima    | Saly    |          3 | 2021-05-07    |         9 | 768882345 | 
+| 771234567 | seck     | Ramatoulaye | Somone  |          3 | 2021-05-07    |         9 | 768882345 | 
+| 772347643 | tall     | abdoulaye   | Mbour   |          3 | 2021-05-07    |         9 | 768882345 | 
+| 775643212 | Ndiaye   | BASSIROU    | SALY    |          3 | 2021-05-07    |         9 | 768882345 | 
+| 776646892 | Seck     | Ramatoulaye | Dakar   |          3 | 2021-05-07    |         9 | 768882345 | 
+| 702184785 | Niane    | Fary        | Dakar   |          4 | 2021-04-20    |         6 | 768882345 | 
+| 708964532 | Dieng    | Fama        | Saly    |          4 | 2021-04-20    |         6 | 768882345 | 
+| 709812308 | Ndiaye   | Marie       | Mbour   |          4 | 2021-04-20    |         6 | 768882345 | 
+| 761320983 | Ndiaye   | Ibrahima    | Mbour   |          4 | 2021-04-20    |         6 | 768882345 | 
+| 763452678 | Goudiaby | Pierre      | Somone  |          4 | 2021-04-20    |         6 | 768882345 | 
+| 768882345 | Niane    | Fary        | Saly    |          4 | 2021-04-20    |         6 | 768882345 | 
+| 769843212 | Manga    | Ibrahima    | Saly    |          4 | 2021-04-20    |         6 | 768882345 | 
+| 771234567 | seck     | Ramatoulaye | Somone  |          4 | 2021-04-20    |         6 | 768882345 | 
+| 772347643 | tall     | abdoulaye   | Mbour   |          4 | 2021-04-20    |         6 | 768882345 | 
+| 775643212 | Ndiaye   | BASSIROU    | SALY    |          4 | 2021-04-20    |         6 | 768882345 | 
+| 776646892 | Seck     | Ramatoulaye | Dakar   |          4 | 2021-04-20    |         6 | 768882345 | 
+| 702184785 | Niane    | Fary        | Dakar   |          5 | 2021-05-05    |        10 | 772347643 | 
+| 708964532 | Dieng    | Fama        | Saly    |          5 | 2021-05-05    |        10 | 772347643 | 
+| 709812308 | Ndiaye   | Marie       | Mbour   |          5 | 2021-05-05    |        10 | 772347643 | 
+| 761320983 | Ndiaye   | Ibrahima    | Mbour   |          5 | 2021-05-05    |        10 | 772347643 | 
+| 763452678 | Goudiaby | Pierre      | Somone  |          5 | 2021-05-05    |        10 | 772347643 | 
+| 768882345 | Niane    | Fary        | Saly    |          5 | 2021-05-05    |        10 | 772347643 | 
+| 769843212 | Manga    | Ibrahima    | Saly    |          5 | 2021-05-05    |        10 | 772347643 | 
+| 771234567 | seck     | Ramatoulaye | Somone  |          5 | 2021-05-05    |        10 | 772347643 | 
+| 772347643 | tall     | abdoulaye   | Mbour   |          5 | 2021-05-05    |        10 | 772347643 | 
+| 775643212 | Ndiaye   | BASSIROU    | SALY    |          5 | 2021-05-05    |        10 | 772347643 | 
+| 776646892 | Seck     | Ramatoulaye | Dakar   |          5 | 2021-05-05    |        10 | 772347643 | 
+| 702184785 | Niane    | Fary        | Dakar   |          6 | 2021-05-07    |         5 | 763452678 | 
+| 708964532 | Dieng    | Fama        | Saly    |          6 | 2021-05-07    |         5 | 763452678 | 
+| 709812308 | Ndiaye   | Marie       | Mbour   |          6 | 2021-05-07    |         5 | 763452678 | 
+| 761320983 | Ndiaye   | Ibrahima    | Mbour   |          6 | 2021-05-07    |         5 | 763452678 | 
+| 763452678 | Goudiaby | Pierre      | Somone  |          6 | 2021-05-07    |         5 | 763452678 | 
+| 768882345 | Niane    | Fary        | Saly    |          6 | 2021-05-07    |         5 | 763452678 | 
+| 769843212 | Manga    | Ibrahima    | Saly    |          6 | 2021-05-07    |         5 | 763452678 | 
+| 771234567 | seck     | Ramatoulaye | Somone  |          6 | 2021-05-07    |         5 | 763452678 | 
+| 772347643 | tall     | abdoulaye   | Mbour   |          6 | 2021-05-07    |         5 | 763452678 | 
+| 775643212 | Ndiaye   | BASSIROU    | SALY    |          6 | 2021-05-07    |         5 | 763452678 | 
+| 776646892 | Seck     | Ramatoulaye | Dakar   |          6 | 2021-05-07    |         5 | 763452678 | 
+| 702184785 | Niane    | Fary        | Dakar   |          7 | 2021-05-07    |         4 | 772347643 | 
+| 708964532 | Dieng    | Fama        | Saly    |          7 | 2021-05-07    |         4 | 772347643 | 
+| 709812308 | Ndiaye   | Marie       | Mbour   |          7 | 2021-05-07    |         4 | 772347643 | 
+| 761320983 | Ndiaye   | Ibrahima    | Mbour   |          7 | 2021-05-07    |         4 | 772347643 | 
+| 763452678 | Goudiaby | Pierre      | Somone  |          7 | 2021-05-07    |         4 | 772347643 | 
+| 768882345 | Niane    | Fary        | Saly    |          7 | 2021-05-07    |         4 | 772347643 | 
+| 769843212 | Manga    | Ibrahima    | Saly    |          7 | 2021-05-07    |         4 | 772347643 | 
+| 771234567 | seck     | Ramatoulaye | Somone  |          7 | 2021-05-07    |         4 | 772347643 | 
+| 772347643 | tall     | abdoulaye   | Mbour   |          7 | 2021-05-07    |         4 | 772347643 | 
+| 775643212 | Ndiaye   | BASSIROU    | SALY    |          7 | 2021-05-07    |         4 | 772347643 | 
+| 776646892 | Seck     | Ramatoulaye | Dakar   |          7 | 2021-05-07    |         4 | 772347643 | 
+| 702184785 | Niane    | Fary        | Dakar   |          8 | 2021-05-08    |         2 | 709812308 | 
+| 708964532 | Dieng    | Fama        | Saly    |          8 | 2021-05-08    |         2 | 709812308 | 
+| 709812308 | Ndiaye   | Marie       | Mbour   |          8 | 2021-05-08    |         2 | 709812308 | 
+| 761320983 | Ndiaye   | Ibrahima    | Mbour   |          8 | 2021-05-08    |         2 | 709812308 | 
+| 763452678 | Goudiaby | Pierre      | Somone  |          8 | 2021-05-08    |         2 | 709812308 | 
+| 768882345 | Niane    | Fary        | Saly    |          8 | 2021-05-08    |         2 | 709812308 | 
+| 769843212 | Manga    | Ibrahima    | Saly    |          8 | 2021-05-08    |         2 | 709812308 | 
+| 771234567 | seck     | Ramatoulaye | Somone  |          8 | 2021-05-08    |         2 | 709812308 | 
+| 772347643 | tall     | abdoulaye   | Mbour   |          8 | 2021-05-08    |         2 | 709812308 | 
+| 775643212 | Ndiaye   | BASSIROU    | SALY    |          8 | 2021-05-08    |         2 | 709812308 | 
+| 776646892 | Seck     | Ramatoulaye | Dakar   |          8 | 2021-05-08    |         2 | 709812308 | 
+| 702184785 | Niane    | Fary        | Dakar   |          9 | 2021-05-10    |         9 | 709812308 | 
+| 708964532 | Dieng    | Fama        | Saly    |          9 | 2021-05-10    |         9 | 709812308 | 
+| 709812308 | Ndiaye   | Marie       | Mbour   |          9 | 2021-05-10    |         9 | 709812308 | 
+| 761320983 | Ndiaye   | Ibrahima    | Mbour   |          9 | 2021-05-10    |         9 | 709812308 | 
+| 763452678 | Goudiaby | Pierre      | Somone  |          9 | 2021-05-10    |         9 | 709812308 | 
+| 768882345 | Niane    | Fary        | Saly    |          9 | 2021-05-10    |         9 | 709812308 | 
+| 769843212 | Manga    | Ibrahima    | Saly    |          9 | 2021-05-10    |         9 | 709812308 | 
+| 771234567 | seck     | Ramatoulaye | Somone  |          9 | 2021-05-10    |         9 | 709812308 | 
+| 772347643 | tall     | abdoulaye   | Mbour   |          9 | 2021-05-10    |         9 | 709812308 | 
+| 775643212 | Ndiaye   | BASSIROU    | SALY    |          9 | 2021-05-10    |         9 | 709812308 | 
+| 776646892 | Seck     | Ramatoulaye | Dakar   |          9 | 2021-05-10    |         9 | 709812308 | 
+| 702184785 | Niane    | Fary        | Dakar   |         10 | 0000-00-00    |         9 | 775643212 | 
+| 708964532 | Dieng    | Fama        | Saly    |         10 | 0000-00-00    |         9 | 775643212 | 
+| 709812308 | Ndiaye   | Marie       | Mbour   |         10 | 0000-00-00    |         9 | 775643212 | 
+| 761320983 | Ndiaye   | Ibrahima    | Mbour   |         10 | 0000-00-00    |         9 | 775643212 | 
+| 763452678 | Goudiaby | Pierre      | Somone  |         10 | 0000-00-00    |         9 | 775643212 | 
+| 768882345 | Niane    | Fary        | Saly    |         10 | 0000-00-00    |         9 | 775643212 | 
+| 769843212 | Manga    | Ibrahima    | Saly    |         10 | 0000-00-00    |         9 | 775643212 | 
+| 771234567 | seck     | Ramatoulaye | Somone  |         10 | 0000-00-00    |         9 | 775643212 | 
+| 772347643 | tall     | abdoulaye   | Mbour   |         10 | 0000-00-00    |         9 | 775643212 | 
+| 775643212 | Ndiaye   | BASSIROU    | SALY    |         10 | 0000-00-00    |         9 | 775643212 | 
+| 776646892 | Seck     | Ramatoulaye | Dakar   |         10 | 0000-00-00    |         9 | 775643212 | 
+| 702184785 | Niane    | Fary        | Dakar   |         11 | 0000-00-00    |        10 | 708964532 | 
+| 708964532 | Dieng    | Fama        | Saly    |         11 | 0000-00-00    |        10 | 708964532 | 
+| 709812308 | Ndiaye   | Marie       | Mbour   |         11 | 0000-00-00    |        10 | 708964532 | 
+| 761320983 | Ndiaye   | Ibrahima    | Mbour   |         11 | 0000-00-00    |        10 | 708964532 | 
+| 763452678 | Goudiaby | Pierre      | Somone  |         11 | 0000-00-00    |        10 | 708964532 | 
+| 768882345 | Niane    | Fary        | Saly    |         11 | 0000-00-00    |        10 | 708964532 | 
+| 769843212 | Manga    | Ibrahima    | Saly    |         11 | 0000-00-00    |        10 | 708964532 | 
+| 771234567 | seck     | Ramatoulaye | Somone  |         11 | 0000-00-00    |        10 | 708964532 | 
+| 772347643 | tall     | abdoulaye   | Mbour   |         11 | 0000-00-00    |        10 | 708964532 | 
+| 775643212 | Ndiaye   | BASSIROU    | SALY    |         11 | 0000-00-00    |        10 | 708964532 | 
+| 776646892 | Seck     | Ramatoulaye | Dakar   |         11 | 0000-00-00    |        10 | 708964532 | 
++-----------+----------+-------------+---------+------------+---------------+-----------+-----------+
+121 rows in set (0.00 sec)
+
+mysql> select*from produits cross join commande;
++-----------+------------------+-------------+------------+------------+---------------+-----------+-----------+
+| idProduit | nomProduit       | prixProduit | fabriquant | idcommande | date_commande | idProduit | contacts  |
++-----------+------------------+-------------+------------+------------+---------------+-----------+-----------+
+|         1 | macbook air      |      500000 | apple      |          1 | 2021-04-20    |         1 | 771234567 | 
+|         2 | macbook air      |      500000 | apple      |          1 | 2021-04-20    |         1 | 771234567 | 
+|         3 | iphone 12        |      450000 | apple      |          1 | 2021-04-20    |         1 | 771234567 | 
+|         4 | TV 55 pouces     |      910000 | LG         |          1 | 2021-04-20    |         1 | 771234567 | 
+|         5 | Camon 15         |       48900 | Tecno      |          1 | 2021-04-20    |         1 | 771234567 | 
+|         6 | Ring light       |       20000 | NULL       |          1 | 2021-04-20    |         1 | 771234567 | 
+|         7 | chargeur macbook |       15000 | apple      |          1 | 2021-04-20    |         1 | 771234567 | 
+|         8 | probook i5       |      200000 | HP         |          1 | 2021-04-20    |         1 | 771234567 | 
+|         9 | iphone XR        |      255000 | apple      |          1 | 2021-04-20    |         1 | 771234567 | 
+|        10 | Notebook 255 G7  |      200000 | HP         |          1 | 2021-04-20    |         1 | 771234567 | 
+|        11 | spark 4          |       60000 | Tecno      |          1 | 2021-04-20    |         1 | 771234567 | 
+|         1 | macbook air      |      500000 | apple      |          2 | 2021-05-07    |         4 | 708964532 | 
+|         2 | macbook air      |      500000 | apple      |          2 | 2021-05-07    |         4 | 708964532 | 
+|         3 | iphone 12        |      450000 | apple      |          2 | 2021-05-07    |         4 | 708964532 | 
+|         4 | TV 55 pouces     |      910000 | LG         |          2 | 2021-05-07    |         4 | 708964532 | 
+|         5 | Camon 15         |       48900 | Tecno      |          2 | 2021-05-07    |         4 | 708964532 | 
+|         6 | Ring light       |       20000 | NULL       |          2 | 2021-05-07    |         4 | 708964532 | 
+|         7 | chargeur macbook |       15000 | apple      |          2 | 2021-05-07    |         4 | 708964532 | 
+|         8 | probook i5       |      200000 | HP         |          2 | 2021-05-07    |         4 | 708964532 | 
+|         9 | iphone XR        |      255000 | apple      |          2 | 2021-05-07    |         4 | 708964532 | 
+|        10 | Notebook 255 G7  |      200000 | HP         |          2 | 2021-05-07    |         4 | 708964532 | 
+|        11 | spark 4          |       60000 | Tecno      |          2 | 2021-05-07    |         4 | 708964532 | 
+|         1 | macbook air      |      500000 | apple      |          3 | 2021-05-07    |         9 | 768882345 | 
+|         2 | macbook air      |      500000 | apple      |          3 | 2021-05-07    |         9 | 768882345 | 
+|         3 | iphone 12        |      450000 | apple      |          3 | 2021-05-07    |         9 | 768882345 | 
+|         4 | TV 55 pouces     |      910000 | LG         |          3 | 2021-05-07    |         9 | 768882345 | 
+|         5 | Camon 15         |       48900 | Tecno      |          3 | 2021-05-07    |         9 | 768882345 | 
+|         6 | Ring light       |       20000 | NULL       |          3 | 2021-05-07    |         9 | 768882345 | 
+|         7 | chargeur macbook |       15000 | apple      |          3 | 2021-05-07    |         9 | 768882345 | 
+|         8 | probook i5       |      200000 | HP         |          3 | 2021-05-07    |         9 | 768882345 | 
+|         9 | iphone XR        |      255000 | apple      |          3 | 2021-05-07    |         9 | 768882345 | 
+|        10 | Notebook 255 G7  |      200000 | HP         |          3 | 2021-05-07    |         9 | 768882345 | 
+|        11 | spark 4          |       60000 | Tecno      |          3 | 2021-05-07    |         9 | 768882345 | 
+|         1 | macbook air      |      500000 | apple      |          4 | 2021-04-20    |         6 | 768882345 | 
+|         2 | macbook air      |      500000 | apple      |          4 | 2021-04-20    |         6 | 768882345 | 
+|         3 | iphone 12        |      450000 | apple      |          4 | 2021-04-20    |         6 | 768882345 | 
+|         4 | TV 55 pouces     |      910000 | LG         |          4 | 2021-04-20    |         6 | 768882345 | 
+|         5 | Camon 15         |       48900 | Tecno      |          4 | 2021-04-20    |         6 | 768882345 | 
+|         6 | Ring light       |       20000 | NULL       |          4 | 2021-04-20    |         6 | 768882345 | 
+|         7 | chargeur macbook |       15000 | apple      |          4 | 2021-04-20    |         6 | 768882345 | 
+|         8 | probook i5       |      200000 | HP         |          4 | 2021-04-20    |         6 | 768882345 | 
+|         9 | iphone XR        |      255000 | apple      |          4 | 2021-04-20    |         6 | 768882345 | 
+|        10 | Notebook 255 G7  |      200000 | HP         |          4 | 2021-04-20    |         6 | 768882345 | 
+|        11 | spark 4          |       60000 | Tecno      |          4 | 2021-04-20    |         6 | 768882345 | 
+|         1 | macbook air      |      500000 | apple      |          5 | 2021-05-05    |        10 | 772347643 | 
+|         2 | macbook air      |      500000 | apple      |          5 | 2021-05-05    |        10 | 772347643 | 
+|         3 | iphone 12        |      450000 | apple      |          5 | 2021-05-05    |        10 | 772347643 | 
+|         4 | TV 55 pouces     |      910000 | LG         |          5 | 2021-05-05    |        10 | 772347643 | 
+|         5 | Camon 15         |       48900 | Tecno      |          5 | 2021-05-05    |        10 | 772347643 | 
+|         6 | Ring light       |       20000 | NULL       |          5 | 2021-05-05    |        10 | 772347643 | 
+|         7 | chargeur macbook |       15000 | apple      |          5 | 2021-05-05    |        10 | 772347643 | 
+|         8 | probook i5       |      200000 | HP         |          5 | 2021-05-05    |        10 | 772347643 | 
+|         9 | iphone XR        |      255000 | apple      |          5 | 2021-05-05    |        10 | 772347643 | 
+|        10 | Notebook 255 G7  |      200000 | HP         |          5 | 2021-05-05    |        10 | 772347643 | 
+|        11 | spark 4          |       60000 | Tecno      |          5 | 2021-05-05    |        10 | 772347643 | 
+|         1 | macbook air      |      500000 | apple      |          6 | 2021-05-07    |         5 | 763452678 | 
+|         2 | macbook air      |      500000 | apple      |          6 | 2021-05-07    |         5 | 763452678 | 
+|         3 | iphone 12        |      450000 | apple      |          6 | 2021-05-07    |         5 | 763452678 | 
+|         4 | TV 55 pouces     |      910000 | LG         |          6 | 2021-05-07    |         5 | 763452678 | 
+|         5 | Camon 15         |       48900 | Tecno      |          6 | 2021-05-07    |         5 | 763452678 | 
+|         6 | Ring light       |       20000 | NULL       |          6 | 2021-05-07    |         5 | 763452678 | 
+|         7 | chargeur macbook |       15000 | apple      |          6 | 2021-05-07    |         5 | 763452678 | 
+|         8 | probook i5       |      200000 | HP         |          6 | 2021-05-07    |         5 | 763452678 | 
+|         9 | iphone XR        |      255000 | apple      |          6 | 2021-05-07    |         5 | 763452678 | 
+|        10 | Notebook 255 G7  |      200000 | HP         |          6 | 2021-05-07    |         5 | 763452678 | 
+|        11 | spark 4          |       60000 | Tecno      |          6 | 2021-05-07    |         5 | 763452678 | 
+|         1 | macbook air      |      500000 | apple      |          7 | 2021-05-07    |         4 | 772347643 | 
+|         2 | macbook air      |      500000 | apple      |          7 | 2021-05-07    |         4 | 772347643 | 
+|         3 | iphone 12        |      450000 | apple      |          7 | 2021-05-07    |         4 | 772347643 | 
+|         4 | TV 55 pouces     |      910000 | LG         |          7 | 2021-05-07    |         4 | 772347643 | 
+|         5 | Camon 15         |       48900 | Tecno      |          7 | 2021-05-07    |         4 | 772347643 | 
+|         6 | Ring light       |       20000 | NULL       |          7 | 2021-05-07    |         4 | 772347643 | 
+|         7 | chargeur macbook |       15000 | apple      |          7 | 2021-05-07    |         4 | 772347643 | 
+|         8 | probook i5       |      200000 | HP         |          7 | 2021-05-07    |         4 | 772347643 | 
+|         9 | iphone XR        |      255000 | apple      |          7 | 2021-05-07    |         4 | 772347643 | 
+|        10 | Notebook 255 G7  |      200000 | HP         |          7 | 2021-05-07    |         4 | 772347643 | 
+|        11 | spark 4          |       60000 | Tecno      |          7 | 2021-05-07    |         4 | 772347643 | 
+|         1 | macbook air      |      500000 | apple      |          8 | 2021-05-08    |         2 | 709812308 | 
+|         2 | macbook air      |      500000 | apple      |          8 | 2021-05-08    |         2 | 709812308 | 
+|         3 | iphone 12        |      450000 | apple      |          8 | 2021-05-08    |         2 | 709812308 | 
+|         4 | TV 55 pouces     |      910000 | LG         |          8 | 2021-05-08    |         2 | 709812308 | 
+|         5 | Camon 15         |       48900 | Tecno      |          8 | 2021-05-08    |         2 | 709812308 | 
+|         6 | Ring light       |       20000 | NULL       |          8 | 2021-05-08    |         2 | 709812308 | 
+|         7 | chargeur macbook |       15000 | apple      |          8 | 2021-05-08    |         2 | 709812308 | 
+|         8 | probook i5       |      200000 | HP         |          8 | 2021-05-08    |         2 | 709812308 | 
+|         9 | iphone XR        |      255000 | apple      |          8 | 2021-05-08    |         2 | 709812308 | 
+|        10 | Notebook 255 G7  |      200000 | HP         |          8 | 2021-05-08    |         2 | 709812308 | 
+|        11 | spark 4          |       60000 | Tecno      |          8 | 2021-05-08    |         2 | 709812308 | 
+|         1 | macbook air      |      500000 | apple      |          9 | 2021-05-10    |         9 | 709812308 | 
+|         2 | macbook air      |      500000 | apple      |          9 | 2021-05-10    |         9 | 709812308 | 
+|         3 | iphone 12        |      450000 | apple      |          9 | 2021-05-10    |         9 | 709812308 | 
+|         4 | TV 55 pouces     |      910000 | LG         |          9 | 2021-05-10    |         9 | 709812308 | 
+|         5 | Camon 15         |       48900 | Tecno      |          9 | 2021-05-10    |         9 | 709812308 | 
+|         6 | Ring light       |       20000 | NULL       |          9 | 2021-05-10    |         9 | 709812308 | 
+|         7 | chargeur macbook |       15000 | apple      |          9 | 2021-05-10    |         9 | 709812308 | 
+|         8 | probook i5       |      200000 | HP         |          9 | 2021-05-10    |         9 | 709812308 | 
+|         9 | iphone XR        |      255000 | apple      |          9 | 2021-05-10    |         9 | 709812308 | 
+|        10 | Notebook 255 G7  |      200000 | HP         |          9 | 2021-05-10    |         9 | 709812308 | 
+|        11 | spark 4          |       60000 | Tecno      |          9 | 2021-05-10    |         9 | 709812308 | 
+|         1 | macbook air      |      500000 | apple      |         10 | 0000-00-00    |         9 | 775643212 | 
+|         2 | macbook air      |      500000 | apple      |         10 | 0000-00-00    |         9 | 775643212 | 
+|         3 | iphone 12        |      450000 | apple      |         10 | 0000-00-00    |         9 | 775643212 | 
+|         4 | TV 55 pouces     |      910000 | LG         |         10 | 0000-00-00    |         9 | 775643212 | 
+|         5 | Camon 15         |       48900 | Tecno      |         10 | 0000-00-00    |         9 | 775643212 | 
+|         6 | Ring light       |       20000 | NULL       |         10 | 0000-00-00    |         9 | 775643212 | 
+|         7 | chargeur macbook |       15000 | apple      |         10 | 0000-00-00    |         9 | 775643212 | 
+|         8 | probook i5       |      200000 | HP         |         10 | 0000-00-00    |         9 | 775643212 | 
+|         9 | iphone XR        |      255000 | apple      |         10 | 0000-00-00    |         9 | 775643212 | 
+|        10 | Notebook 255 G7  |      200000 | HP         |         10 | 0000-00-00    |         9 | 775643212 | 
+|        11 | spark 4          |       60000 | Tecno      |         10 | 0000-00-00    |         9 | 775643212 | 
+|         1 | macbook air      |      500000 | apple      |         11 | 0000-00-00    |        10 | 708964532 | 
+|         2 | macbook air      |      500000 | apple      |         11 | 0000-00-00    |        10 | 708964532 | 
+|         3 | iphone 12        |      450000 | apple      |         11 | 0000-00-00    |        10 | 708964532 | 
+|         4 | TV 55 pouces     |      910000 | LG         |         11 | 0000-00-00    |        10 | 708964532 | 
+|         5 | Camon 15         |       48900 | Tecno      |         11 | 0000-00-00    |        10 | 708964532 | 
+|         6 | Ring light       |       20000 | NULL       |         11 | 0000-00-00    |        10 | 708964532 | 
+|         7 | chargeur macbook |       15000 | apple      |         11 | 0000-00-00    |        10 | 708964532 | 
+|         8 | probook i5       |      200000 | HP         |         11 | 0000-00-00    |        10 | 708964532 | 
+|         9 | iphone XR        |      255000 | apple      |         11 | 0000-00-00    |        10 | 708964532 | 
+|        10 | Notebook 255 G7  |      200000 | HP         |         11 | 0000-00-00    |        10 | 708964532 | 
+|        11 | spark 4          |       60000 | Tecno      |         11 | 0000-00-00    |        10 | 708964532 | 
++-----------+------------------+-------------+------------+------------+---------------+-----------+-----------+
+121 rows in set (0.00 sec)
+
+mysql> #(question 8): Pour chaque produit, afficher le nom et son fabriquant;
+mysql> select nomProduit, fabriquant from produits;
++------------------+------------+
+| nomProduit       | fabriquant |
++------------------+------------+
+| macbook air      | apple      | 
+| macbook air      | apple      | 
+| iphone 12        | apple      | 
+| TV 55 pouces     | LG         | 
+| Camon 15         | Tecno      | 
+| Ring light       | NULL       | 
+| chargeur macbook | apple      | 
+| probook i5       | HP         | 
+| iphone XR        | apple      | 
+| Notebook 255 G7  | HP         | 
+| spark 4          | Tecno      | 
++------------------+------------+
+11 rows in set (0.00 sec)
+
+mysql> notee;

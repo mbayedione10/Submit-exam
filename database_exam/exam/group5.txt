@@ -1,0 +1,311 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema | 
+| boutique           | 
+| cours              | 
+| dara               | 
+| mysql              | 
+| test               | 
++--------------------+
+6 rows in set (0.04 sec)
+
+mysql> use boutique;
+Database changed
+mysql> show table;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> show tables;
++--------------------+
+| Tables_in_boutique |
++--------------------+
+| client             | 
+| commande           | 
+| produit            | 
++--------------------+
+3 rows in set (0.57 sec)
+
+mysql> select*from client;
++-----------+----------+-------------+---------+
+| contact   | nom      | prenom      | adresse |
++-----------+----------+-------------+---------+
+| 708964532 | Dieng    | Fama        | Saly    | 
+| 709812308 | Ndiaye   | Marie       | Mbour   | 
+| 763452678 | Goudiaby | Pierre      | Somone  | 
+| 768882345 | Niane    | Fary        | Somone  | 
+| 769843212 | Manga    | Ibrahima    | Saly    | 
+| 771234567 | seck     | Ramatoulaye | Somone  | 
+| 772347643 | tall     | abdoulaye   | Mbour   | 
+| 775643212 | Ndiaye   | BASSIROU    | SALY    | 
++-----------+----------+-------------+---------+
+8 rows in set (0.25 sec)
+
+mysql> 	#2 insertion des donn‚es 
+mysql> insert into client values(776646892,'seck','Ramatoulaye','Dakar');
+Query OK, 1 row affected (0.46 sec)
+
+mysql> insert into client values(702184785,'Niane','Fary','Dakar');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into client values(761320983,'Ndiaye','Ibrahima','Mbour');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select*from commande;
++------------+---------------+-----------+-----------+
+| idcommande | date_commande | idproduit | contact   |
++------------+---------------+-----------+-----------+
+|          1 | 2021-04-20    |         1 | 771234567 | 
+|          2 | 2021-05-07    |         4 | 708964532 | 
+|          3 | 2021-05-07    |         9 | 768882345 | 
+|          4 | 2021-04-20    |         6 | 768882345 | 
+|          5 | 2021-05-05    |        10 | 772347643 | 
+|          6 | 2021-05-07    |         5 | 763452678 | 
+|          7 | 2021-05-07    |         4 | 772347643 | 
+|          8 | 2021-05-08    |         2 | 709812308 | 
+|          9 | 2021-05-10    |         9 | 709812308 | 
++------------+---------------+-----------+-----------+
+9 rows in set (0.10 sec)
+
+mysql> insert into commande(date_commande,idproduit,contact) values(2021-05-07,9,775643212);
+ERROR 1292 (22007): Incorrect date value: '2009' for column 'date_commande' at row 1
+mysql> insert into commande(date_commande,idproduit,contact) values(07-05-2021,9,775643212);
+ERROR 1292 (22007): Incorrect date value: '-2019' for column 'date_commande' at row 1
+mysql> insert into commande(date_commande,idproduit,contact) values(07-05-2021,9,775643212);
+ERROR 1292 (22007): Incorrect date value: '-2019' for column 'date_commande' at row 1
+mysql> insert into commande(date_commande,idproduit,contact) values('07-05-2021',9,775643212);
+ERROR 1292 (22007): Incorrect date value: '07-05-2021' for column 'date_commande' at row 1
+mysql> insert into commande(date_commande,idproduit,contact) values(07/05/2021,9,775643212);
+Query OK, 1 row affected (0.20 sec)
+
+mysql> insert into commande(date_commande,idproduit,contact) values(05/05/2021,10,708964532);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select*from commande;
++------------+---------------+-----------+-----------+
+| idcommande | date_commande | idproduit | contact   |
++------------+---------------+-----------+-----------+
+|          1 | 2021-04-20    |         1 | 771234567 | 
+|          2 | 2021-05-07    |         4 | 708964532 | 
+|          3 | 2021-05-07    |         9 | 768882345 | 
+|          4 | 2021-04-20    |         6 | 768882345 | 
+|          5 | 2021-05-05    |        10 | 772347643 | 
+|          6 | 2021-05-07    |         5 | 763452678 | 
+|          7 | 2021-05-07    |         4 | 772347643 | 
+|          8 | 2021-05-08    |         2 | 709812308 | 
+|          9 | 2021-05-10    |         9 | 709812308 | 
+|         10 | 0000-00-00    |         9 | 775643212 | 
+|         11 | 0000-00-00    |        10 | 708964532 | 
++------------+---------------+-----------+-----------+
+11 rows in set (0.00 sec)
+
+mysql> udate commande set date_commande='2021-05-07' where idcommande=9;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'udate commande set date_commande='2021-05-07' where idcommande=9' at line 1
+mysql> update commande set date_commande='2021-05-07' where idcommande=9;
+Query OK, 1 row affected (0.17 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update commande set date_commande='2021-05-05' where idcommande=10;
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from commande;
++------------+---------------+-----------+-----------+
+| idcommande | date_commande | idproduit | contact   |
++------------+---------------+-----------+-----------+
+|          1 | 2021-04-20    |         1 | 771234567 | 
+|          2 | 2021-05-07    |         4 | 708964532 | 
+|          3 | 2021-05-07    |         9 | 768882345 | 
+|          4 | 2021-04-20    |         6 | 768882345 | 
+|          5 | 2021-05-05    |        10 | 772347643 | 
+|          6 | 2021-05-07    |         5 | 763452678 | 
+|          7 | 2021-05-07    |         4 | 772347643 | 
+|          8 | 2021-05-08    |         2 | 709812308 | 
+|          9 | 2021-05-07    |         9 | 709812308 | 
+|         10 | 2021-05-05    |         9 | 775643212 | 
+|         11 | 0000-00-00    |        10 | 708964532 | 
++------------+---------------+-----------+-----------+
+11 rows in set (0.00 sec)
+
+mysql> update commande set date_commande='2021-05-05 where idcommande=11;
+    '> select*from commande;
+    '> 
+    '> update commande set date_commande='2021-05-05 where idcommande=11;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2021-05-05 where idcommande=11' at line 1
+mysql> update commande set date_commande='2021-05-05' where idcommande=11;
+Query OK, 1 row affected (0.12 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from commande;
++------------+---------------+-----------+-----------+
+| idcommande | date_commande | idproduit | contact   |
++------------+---------------+-----------+-----------+
+|          1 | 2021-04-20    |         1 | 771234567 | 
+|          2 | 2021-05-07    |         4 | 708964532 | 
+|          3 | 2021-05-07    |         9 | 768882345 | 
+|          4 | 2021-04-20    |         6 | 768882345 | 
+|          5 | 2021-05-05    |        10 | 772347643 | 
+|          6 | 2021-05-07    |         5 | 763452678 | 
+|          7 | 2021-05-07    |         4 | 772347643 | 
+|          8 | 2021-05-08    |         2 | 709812308 | 
+|          9 | 2021-05-07    |         9 | 709812308 | 
+|         10 | 2021-05-05    |         9 | 775643212 | 
+|         11 | 2021-05-05    |        10 | 708964532 | 
++------------+---------------+-----------+-----------+
+11 rows in set (0.00 sec)
+
+mysql> #3
+mysql> update client set adresse='Saly' where contact=702184785;
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from client;
++-----------+----------+-------------+---------+
+| contact   | nom      | prenom      | adresse |
++-----------+----------+-------------+---------+
+| 702184785 | Niane    | Fary        | Saly    | 
+| 708964532 | Dieng    | Fama        | Saly    | 
+| 709812308 | Ndiaye   | Marie       | Mbour   | 
+| 761320983 | Ndiaye   | Ibrahima    | Mbour   | 
+| 763452678 | Goudiaby | Pierre      | Somone  | 
+| 768882345 | Niane    | Fary        | Somone  | 
+| 769843212 | Manga    | Ibrahima    | Saly    | 
+| 771234567 | seck     | Ramatoulaye | Somone  | 
+| 772347643 | tall     | abdoulaye   | Mbour   | 
+| 775643212 | Ndiaye   | BASSIROU    | SALY    | 
+| 776646892 | seck     | Ramatoulaye | Dakar   | 
++-----------+----------+-------------+---------+
+11 rows in set (0.00 sec)
+
+mysql> #4
+mysql> selectcount(*)from clients;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selectcount(*)from clients' at line 1
+mysql> select count(*)from clients;
+ERROR 1146 (42S02): Table 'boutique.clients' doesn't exist
+mysql> select count(*)from table clients;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table clients' at line 1
+mysql> select count(*)from  client;
++----------+
+| count(*) |
++----------+
+|       11 | 
++----------+
+1 row in set (0.04 sec)
+
+mysql> select count(*)from  commande where date_commande='07-05-2021';
++----------+
+| count(*) |
++----------+
+|        0 | 
++----------+
+1 row in set, 2 warnings (0.07 sec)
+
+mysql> select count(*)from  commande where date_commande='2021-05-07';
++----------+
+| count(*) |
++----------+
+|        5 | 
++----------+
+1 row in set (0.07 sec)
+
+mysql> #6
+mysql> show table produit;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'produit' at line 1
+mysql> show table prodiut;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'prodiut' at line 1
+mysql> select*from produit;
++-----------+------------------+-------------+------------+
+| idproduit | nomprodiut       | prixproduit | fabriquant |
++-----------+------------------+-------------+------------+
+|         1 | macbook air      |      500000 | apple      | 
+|         2 | iphone 12        |      450000 | apple      | 
+|         3 | TV 55 pouces     |      910000 | LG         | 
+|         4 | Camon 15         |       48900 | Tecno      | 
+|         5 | Ring light       |       20000 | NULL       | 
+|         6 | chargeur macbook |       15000 | apple      | 
+|         7 | probook i5       |      200000 | HP         | 
+|         8 | iphone XR        |      255000 | apple      | 
+|         9 | Notebook 255 G7  |      200000 | HP         | 
+|        10 | spark 4          |       60000 | Tecno      | 
++-----------+------------------+-------------+------------+
+10 rows in set (0.07 sec)
+
+mysql> select*from produit where fabriquant='apple';
++-----------+------------------+-------------+------------+
+| idproduit | nomprodiut       | prixproduit | fabriquant |
++-----------+------------------+-------------+------------+
+|         1 | macbook air      |      500000 | apple      | 
+|         2 | iphone 12        |      450000 | apple      | 
+|         6 | chargeur macbook |       15000 | apple      | 
+|         8 | iphone XR        |      255000 | apple      | 
++-----------+------------------+-------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> #7
+mysql> select *from client order by nom;
++-----------+----------+-------------+---------+
+| contact   | nom      | prenom      | adresse |
++-----------+----------+-------------+---------+
+| 708964532 | Dieng    | Fama        | Saly    | 
+| 763452678 | Goudiaby | Pierre      | Somone  | 
+| 769843212 | Manga    | Ibrahima    | Saly    | 
+| 709812308 | Ndiaye   | Marie       | Mbour   | 
+| 761320983 | Ndiaye   | Ibrahima    | Mbour   | 
+| 775643212 | Ndiaye   | BASSIROU    | SALY    | 
+| 702184785 | Niane    | Fary        | Saly    | 
+| 768882345 | Niane    | Fary        | Somone  | 
+| 771234567 | seck     | Ramatoulaye | Somone  | 
+| 776646892 | seck     | Ramatoulaye | Dakar   | 
+| 772347643 | tall     | abdoulaye   | Mbour   | 
++-----------+----------+-------------+---------+
+11 rows in set (0.09 sec)
+
+mysql> #8
+mysql> select* from produit nom and fabriquant;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and fabriquant' at line 1
+mysql> select* from produit nomprodiut and fabriquant;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and fabriquant' at line 1
+mysql> select* from  nomprodiut and fabriquant;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and fabriquant' at line 1
+mysql> select nomprodiut,fabriquant from produit;
++------------------+------------+
+| nomprodiut       | fabriquant |
++------------------+------------+
+| macbook air      | apple      | 
+| iphone 12        | apple      | 
+| TV 55 pouces     | LG         | 
+| Camon 15         | Tecno      | 
+| Ring light       | NULL       | 
+| chargeur macbook | apple      | 
+| probook i5       | HP         | 
+| iphone XR        | apple      | 
+| Notebook 255 G7  | HP         | 
+| spark 4          | Tecno      | 
++------------------+------------+
+10 rows in set (0.00 sec)
+
+mysql> #9
+mysql> select as prixproduit from produit order by prixproduit desc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'as prixproduit from produit order by prixproduit desc' at line 1
+mysql> select prixproduit from produit order by prixproduit desc;
++-------------+
+| prixproduit |
++-------------+
+|      910000 | 
+|      500000 | 
+|      450000 | 
+|      255000 | 
+|      200000 | 
+|      200000 | 
+|       60000 | 
+|       48900 | 
+|       20000 | 
+|       15000 | 
++-------------+
+10 rows in set (0.01 sec)
+
+mysql> #10
+mysql> select* from prixproduit where prixproduit between 50000 and 250000;
+ERROR 1146 (42S02): Table 'boutique.prixproduit' doesn't exist
+mysql> select* from prixproduit where prixproduit between 50000 and 250000;
+ERROR 1146 (42S02): Table 'boutique.prixproduit' doesn't exist
+mysql> NOTEE

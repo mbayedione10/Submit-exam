@@ -1,0 +1,310 @@
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema | 
+| boutique           | 
+| cours              | 
+| mysql              | 
+| test               | 
++--------------------+
+5 rows in set (0.26 sec)
+
+mysql> use boutique
+Database changed
+mysql> show table
+    -> ;
+
+mysql> show tables ;
++--------------------+
+| Tables_in_boutique |
++--------------------+
+| client             | 
+| commande           | 
+| produit            | 
++--------------------+
+3 rows in set (0.24 sec)
+
+mysql> describe client;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| contact | int(11)      | NO   | PRI | NULL    |       | 
+| nom     | varchar(50)  | NO   |     | NULL    |       | 
+| prenom  | varchar(100) | NO   |     | NULL    |       | 
+| adresse | varchar(100) | YES  |     | NULL    |       | 
++---------+--------------+------+-----+---------+-------+
+4 rows in set (0.24 sec)
+
+mysql> #afficher toutes les donn‚es de la tables client
+mysql> select*from client;
++-----------+--------+------------+---------+
+| contact   | nom    | prenom     | adresse |
++-----------+--------+------------+---------+
+| 771234567 | seck   | ramatoulay | somone  | 
+| 772347643 | tall   | abdoulaye  | mbour   | 
+| 775643212 | ndiaye | bassirou   | saly    | 
++-----------+--------+------------+---------+
+3 rows in set (0.09 sec)
+
+mysql> insert into client values(702184785,'niane','fary','mbour');
+Query OK, 1 row affected (0.24 sec)
+
+mysql> select*from client;
++-----------+--------+------------+---------+
+| contact   | nom    | prenom     | adresse |
++-----------+--------+------------+---------+
+| 702184785 | niane  | fary       | mbour   | 
+| 771234567 | seck   | ramatoulay | somone  | 
+| 772347643 | tall   | abdoulaye  | mbour   | 
+| 775643212 | ndiaye | bassirou   | saly    | 
++-----------+--------+------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> insert into client values(761320983,'ndiaye','ibrahima','mbour');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select*from client;
++-----------+--------+------------+---------+
+| contact   | nom    | prenom     | adresse |
++-----------+--------+------------+---------+
+| 702184785 | niane  | fary       | mbour   | 
+| 761320983 | ndiaye | ibrahima   | mbour   | 
+| 771234567 | seck   | ramatoulay | somone  | 
+| 772347643 | tall   | abdoulaye  | mbour   | 
+| 775643212 | ndiaye | bassirou   | saly    | 
++-----------+--------+------------+---------+
+5 rows in set (0.04 sec)
+
+mysql> update client set adresse = 'somone' where adresse='mbour';
+Query OK, 3 rows affected (0.17 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select*from client;
++-----------+--------+------------+---------+
+| contact   | nom    | prenom     | adresse |
++-----------+--------+------------+---------+
+| 702184785 | niane  | fary       | somone  | 
+| 761320983 | ndiaye | ibrahima   | somone  | 
+| 771234567 | seck   | ramatoulay | somone  | 
+| 772347643 | tall   | abdoulaye  | somone  | 
+| 775643212 | ndiaye | bassirou   | saly    | 
++-----------+--------+------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> update client set adresse = 'mbour',nom='tall' where contact=772347643;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from client;
++-----------+--------+------------+---------+
+| contact   | nom    | prenom     | adresse |
++-----------+--------+------------+---------+
+| 702184785 | niane  | fary       | somone  | 
+| 761320983 | ndiaye | ibrahima   | somone  | 
+| 771234567 | seck   | ramatoulay | somone  | 
+| 772347643 | tall   | abdoulaye  | mbour   | 
+| 775643212 | ndiaye | bassirou   | saly    | 
++-----------+--------+------------+---------+
+5 rows in set (0.00 sec)
+
+mysql>  update client set adresse = 'mbour',nom='tall' where contact=761320983;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from client;
++-----------+--------+------------+---------+
+| contact   | nom    | prenom     | adresse |
++-----------+--------+------------+---------+
+| 702184785 | niane  | fary       | somone  | 
+| 761320983 | tall   | ibrahima   | mbour   | 
+| 771234567 | seck   | ramatoulay | somone  | 
+| 772347643 | tall   | abdoulaye  | mbour   | 
+| 775643212 | ndiaye | bassirou   | saly    | 
++-----------+--------+------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> update client set adresse = 'saly',nom='niane' where contact=702184785;
+Query OK, 1 row affected (0.32 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from client;
++-----------+--------+------------+---------+
+| contact   | nom    | prenom     | adresse |
++-----------+--------+------------+---------+
+| 702184785 | niane  | fary       | saly    | 
+| 761320983 | tall   | ibrahima   | mbour   | 
+| 771234567 | seck   | ramatoulay | somone  | 
+| 772347643 | tall   | abdoulaye  | mbour   | 
+| 775643212 | ndiaye | bassirou   | saly    | 
++-----------+--------+------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> #inserer des donn'es dans clients
+mysql> insert into client(date_commande,idproduit,contact)
+    -> values
+    -> (07/01/2021, '9', '775643212')
+    -> (05/05/2021, '10', '708964532')
+    -> ;
+
+mysql> describe produit;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| idproduit   | int(11)      | NO   | PRI | NULL    | auto_increment | 
+| nomPRODUIT  | varchar(50)  | NO   |     | NULL    |                | 
+| prixPRODUIT | int(11)      | NO   |     | NULL    |                | 
+| FABRIQUANT  | varchar(100) | YES  |     | NULL    |                | 
++-------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.13 sec)
+
+mysql> mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema | 
+| boutique           | 
+| cours              | 
+| mysql              | 
+| test               | 
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> show database boutique;
+mysql> use boutique
+Database changed
+mysql> show tables;
++--------------------+
+| Tables_in_boutique |
++--------------------+
+| client             | 
+| commande           | 
+| produit            | 
++--------------------+
+3 rows in set (0.04 sec)
+
+mysql> describe client;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| contact | int(11)      | NO   | PRI | NULL    |       | 
+| nom     | varchar(50)  | NO   |     | NULL    |       | 
+| prenom  | varchar(100) | NO   |     | NULL    |       | 
+| adresse | varchar(100) | YES  |     | NULL    |       | 
++---------+--------------+------+-----+---------+-------+
+4 rows in set (0.08 sec)
+
+mysql> #afficher toutes les donn'es de la tables client
+mysql> select*from client;
++-----------+--------+------------+---------+
+| contact   | nom    | prenom     | adresse |
++-----------+--------+------------+---------+
+| 702184785 | niane  | fary       | saly    | 
+| 761320983 | tall   | ibrahima   | mbour   | 
+| 771234567 | seck   | ramatoulay | somone  | 
+| 772347643 | tall   | abdoulaye  | mbour   | 
+| 775643212 | ndiaye | bassirou   | saly    | 
++-----------+--------+------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> show tables;
++--------------------+
+| Tables_in_boutique |
++--------------------+
+| client             | 
+| commande           | 
+| produit            | 
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql> 
+mysql> mysql> describe comande
+mysql> show tables;
++--------------------+
+| Tables_in_boutique |
++--------------------+
+| client             | 
+| commande           | 
+| produit            | 
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql> mysql> describe comande;
+
+mysql>  describe commande;
++---------------+---------+------+-----+---------+----------------+
+| Field         | Type    | Null | Key | Default | Extra          |
++---------------+---------+------+-----+---------+----------------+
+| idcommande    | int(11) | NO   | PRI | NULL    | auto_increment | 
+| date_commande | date    | NO   |     | NULL    |                | 
+| idproduit     | int(11) | YES  | MUL | NULL    |                | 
+| contact       | int(11) | YES  |     | NULL    |                | 
++---------------+---------+------+-----+---------+----------------+
+4 rows in set (0.09 sec)
+
+mysql> #inserer des donn'es dans commande
+mysql> insert into commande(date_commande,idproduit,contact)
+    -> values
+    -> ('07/01/2021', '9', '775643212')
+    -> ('05/05/2021', '10', '708964532')
+    -> ;
+
+mysql> #inserer des donn'es dans commande
+mysql> insert into commande(date_commande,idproduit,contact)
+    -> values
+    -> ('07/01/2021', '9', '775643212')
+    -> ('07/05/2021', '9', '775643212')
+    -> '('05/05/2021', '10', '708964532')
+    '> ;
+    '> 
+    '> #inserer des donn'es dans commande
+    -> insert into commande(date_commande,idproduit,contact)
+    -> values
+    -> ('07/05/2021', '9', '775643212')
+    -> ;
+;
+
+#inserer ' at line 4
+mysql> #inserer des donn'es dans commande
+mysql> insert into commande(date_commande,idproduit,contact)
+    -> values
+    -> '('07/05/2021', '9', '775643212')
+    '> '('05/05/2021', '10', '708964532')
+    -> ;
+
+mysql> #inserer des donn'es dans commande
+mysql> insert into commande(date_commande,idproduit,contact)
+    -> values
+    -> '('07/05/2021', '9', '775643212')
+    '> ''('05/05/2021', '10', '708964532')
+    '> ;
+    '> #inserer des donn'es dans commande
+    -> '('05/05/2021', '10', '708964532')
+    '> ;
+    '> #inserer des donn'es dans commande
+    -> insert into commande(date_commande,idproduit,contact)
+    -> values
+    -> '('07/05/2021', '9', '775643212')'('07/05/2021', '9', '775643212')
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''('07/05/2021', '9', '775643212')
+''('05/05/2021', '10', '708964532')
+;
+#inserer' at line 3
+mysql> #afficher tous les clients 
+mysql> #afficher tous les clients dans l'ordre alphab‚tique;
+mysql> select*from client;
++-----------+--------+------------+---------+
+| contact   | nom    | prenom     | adresse |
++-----------+--------+------------+---------+
+| 702184785 | niane  | fary       | saly    | 
+| 761320983 | tall   | ibrahima   | mbour   | 
+| 771234567 | seck   | ramatoulay | somone  | 
+| 772347643 | tall   | abdoulaye  | mbour   | 
+| 775643212 | ndiaye | bassirou   | saly    | 
++-----------+--------+------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> tee
+Currently logging to file 'groupe1.txt'
+mysql> exit
